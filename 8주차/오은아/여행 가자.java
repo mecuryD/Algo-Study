@@ -51,7 +51,7 @@ public class Main {
 
         if(p[a] == a) return a; //나의 부모가 나라면
         return find(p[a]); //나의 부모가 아직 있다면
-        
+
     }
 
     static void union(int a, int b) {//0,1 1,0 1,2
