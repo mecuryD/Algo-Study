@@ -1,0 +1,63 @@
+import java.util.*;
+
+public class Main {
+
+    public static class Water {
+        int a, b, c;
+
+        public Water(int a, int b, int c) {
+            this.a = a;
+            this.b = b;
+            this.c = c;
+        }
+    }
+
+    static ArrayList<Integer> ansList;
+    static int capaA, capaB, capaC;
+    static boolean[][][] visited = new boolean[201][201][201];
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ansList = new ArrayList<>();
+
+        capaA = sc.nextInt();
+        capaB = sc.nextInt();
+        capaC = sc.nextInt();
+
+        dfs(new Water(0, 0, capaC));
+        Collections.sort(ansList);
+        for (int i = 0; i < ansList.size(); i++) {
+            System.out.print(ansList.get(i) + " ");
+        }
+        System.out.println();
+    }
+
+    public static void dfs(Water water) {
+        int a = water.a;
+        int b = water.b;
+        int c = water.c;
+
+        if (visited[a][b][c]) return;
+        visited[a][b][c] = true;
+
+        if (a == 0) ansList.add(c);
+
+        if (a + b >= capaB) dfs(new Water(a - (capaB - b), capaB, c));
+        else dfs(new Water(0, a + b, c));
+
+        if (a + c >= capaC) dfs(new Water(a - (capaC - c), b, capaC));
+        else dfs(new Water(0, b, a + c));
+
+        if (b + a >= capaA) dfs(new Water(capaA, b - (capaA - a), c));
+        else dfs(new Water(b + a, 0, c));
+
+        if (b + c >= capaC) dfs(new Water(a, b - (capaC - c), capaC));
+        else dfs(new Water(a, 0, b + c));
+
+        if (c + a >= capaA) dfs(new Water(capaA, b, c - (capaA - a)));
+        else dfs(new Water(a + c, b, 0));
+
+        if (c + b >= capaB) dfs(new Water(a, capaB, c - (capaB - b)));
+        else dfs(new Water(a, b + c, 0));
+    }
+}
