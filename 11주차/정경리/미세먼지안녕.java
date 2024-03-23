@@ -30,7 +30,7 @@ public class 미세먼지안녕 {
             }
             System.out.println();
         }
-        System.out.println("=======================");
+        System.out.println("======================= ");
     }
 
     static class Node{
