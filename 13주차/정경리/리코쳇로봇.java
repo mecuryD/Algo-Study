@@ -26,7 +26,6 @@ class Solution {
         int[][] v = new int[N][M];
         Queue<Point> q = new ArrayDeque();
 
-        // 우선 출발점의 좌표를 찾는다.
         for(int i = 0 ; i < N; ++i){
             String s = board[i];
             for(int j = 0 ; j < M; ++j){
@@ -49,7 +48,7 @@ class Solution {
             for(int d = 0 ; d < 4; ++d){
                 int nextX = cur.x + dx[d];
                 int nextY = cur.y + dy[d];
-                while(true){ // 해당 방향으로 최대한 끝까지 이동해본다.
+                while(true){ 
                     if(inRange(nextX, nextY) && board[nextX].charAt(nextY) != 'D'){
                         nextX += dx[d];
                         nextY += dy[d];
