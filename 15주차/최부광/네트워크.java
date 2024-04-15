@@ -1,6 +1,8 @@
 import java.util.*;
 
 // [프로그래머스] 네트워크
+// 그래프가 연결되면 하나의 네트워크로 본다
+// LEVEL3지만 DFS/BFS 알고리즘을 이용하면 무난하게 해결되는 문제
 class Solution {
     
     static int count = 0;
