@@ -1,0 +1,78 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+	
+	public static void main(String[] args)throws Exception {
+		
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		
+		int n= Integer.parseInt(br.readLine());
+		int m= Integer.parseInt(br.readLine());
+		
+		int[][] map= new int[n][n];
+		StringTokenizer st;
+		
+		//1. 부모 저장할 배열 생성
+		
+		//연결리스트 생성
+		ArrayList<Integer>[] graph= new ArrayList[n+1];
+		
+		for(int i=1;i<=n; i++)
+			graph[i]= new ArrayList();
+		
+		//연결리스트 입력
+		for(int i=1; i<=n; i++) {
+			st= new StringTokenizer(br.readLine());
+			for(int j=1; j<=n; j++) {
+				
+				int tmp= Integer.parseInt(st.nextToken());
+				if(tmp==1) {
+				graph[i].add(j);
+				graph[j].add(i);
+				}
+			}
+		}
+		
+		//여행 계획에 나오는 도시들을 모두 방문할 수만 있으면 되는거잖아
+		st= new StringTokenizer(br.readLine());
+		
+		ArrayList<Integer> trip= new ArrayList<Integer>();
+		
+		while(st.hasMoreTokens()) {
+		trip.add(Integer.parseInt(st.nextToken()));
+		}
+		
+		Queue<Integer> q= new ArrayDeque<Integer>();
+		boolean[] vis= new boolean[n+1];
+		
+		q.add(trip.get(0));
+		vis[trip.get(0)]= true;
+		
+		//어차피 연결되어있으면 다 가는거니까
+		//여행계획이 vis에 다 있으면 OK
+		while(!q.isEmpty()) {
+			
+			int tmp= q.poll();
+			for(int x: graph[tmp]) {
+				if(!vis[x]) {
+					vis[x]= true;
+					q.add(x);
+				}
+			}
+		}
+		
+		boolean flag= false;
+		
+		for(int x: trip) {
+			
+			if(!vis[x]) flag= true;
+			
+		}
+		
+		if(flag)	System.out.print("NO");
+		else System.out.print("YES");
+		
+	}
+
+}
