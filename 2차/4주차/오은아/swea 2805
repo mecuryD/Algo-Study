@@ -1,0 +1,49 @@
+import java.util.*;
+import java.io.FileInputStream;
+
+class Solution
+{
+    public static void main(String args[]) throws Exception
+    {
+        Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
+
+        int T;
+        T = sc.nextInt();
+
+        for(int test_case = 1; test_case <= T; test_case++)
+        {
+            int n = sc.nextInt();
+            int ans = 0;
+
+            int[][] map = new int[n][n];
+
+            for(int i = 0; i < n; i++){
+                String str = sc.next();
+                for(int j = 0; j < n; j++){
+                    map[i][j] = str.charAt(j) - '0';
+                }
+            }
+
+            int mid = n / 2;
+
+            // 위쪽 다이아몬드 포함 중간
+            for(int i = 0; i <= mid; i++){
+                for(int j = mid - i; j <= mid + i; j++){
+                    ans += map[i][j];
+                }
+            }
+
+            // 아래쪽 다이아몬드
+            for(int i = mid + 1; i < n; i++){
+                for(int j = i - mid; j < n - (i - mid); j++){
+                    ans += map[i][j];
+                }
+            }
+
+            sb.append("#").append(test_case).append(" ").append(ans).append("\n");
+        }
+
+        System.out.print(sb);
+    }
+}
